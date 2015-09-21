@@ -1,0 +1,19 @@
+
+if(PNG=='x11') quartz(width=8, height=5)
+if(PNG == 'png')
+    png(file.path(GRAPH_PNG,
+       paste("S1A-AveDailyActPattByDayType2.png", sep='')),
+         height=480, width=480*11/8)
+if(PNG == 'pdf')
+    pdf(file.path(GRAPH_PDF,
+       paste("S1A-AveDailyActPattByDayType2.pdf", sep='')),
+         height=8, width=11)
+#par(mfrow=c(1,1), mar=c(2,2,4,1), oma=c(2,2,2,0))
+
+
+print(plot(xyplot(Steps ~ HrMin | DayType, data=StepsByIntDayType.frm, type='l', layout=c(1,2),
+    scales=list(x=list(at=at.vec, labels=unique(StepsByIntDayType.frm$HrMin)[at.vec])),
+    title="Average Daily Activity Pattern by Day Type")))
+
+if(PNG != 'x11') dev.off()
+
